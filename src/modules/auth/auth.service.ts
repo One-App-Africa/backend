@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { KNEX_CONNECTION } from '@/config/database.module';
 import { REDIS_CLIENT } from '@/config/redis.module';
 import { LoggerService } from '@/services/logger.service';
+import { CampaignService } from '@/modules/campaign/campaign.service';
 import { RegisterDto } from './dto/register.dto';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { ResendOtpDto } from './dto/resend-otp.dto';
@@ -22,6 +23,7 @@ export class AuthService {
     private jwtService: JwtService,
     private configService: ConfigService,
     private logger: LoggerService,
+    private campaignService: CampaignService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -123,6 +125,16 @@ export class AuthService {
 
     // Create wallets for the user
     await this.createUserWallets(user.id);
+
+    // Enroll in First 5K campaign (if eligible)
+    try {
+      await this.campaignService.enrollInFirst5K(user.id);
+    } catch (error) {
+      this.logger.warn(
+        `Failed to enroll user ${user.id} in First 5K campaign: ${error.message}`,
+        'AuthService',
+      );
+    }
 
     // Generate tokens
     const tokens = await this.generateTokens(user.id);
