@@ -20,8 +20,8 @@ export class WebhookController {
     return this.webhookService.handleCardWebhook(data, headers);
   }
 
-  @Post('twilio')
-  async handleTwilioWebhook(@Body() data: any) {
-    return this.webhookService.handleTwilioWebhook(data);
+  @Post('meta-whatsapp')
+  async handleMetaWhatsAppWebhook(@Body() data: any, @Headers() headers: any) {
+    return this.webhookService.handleMetaWhatsAppWebhook(data, headers);
   }
 }

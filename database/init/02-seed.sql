@@ -13,7 +13,7 @@ VALUES (
   'active'
 ) ON CONFLICT (email) DO NOTHING;
 
--- Create a sample campaign (First 10K Promo)
+-- Create a sample campaign (First 5K Promo)
 INSERT INTO campaigns (
   name,
   description,
@@ -27,12 +27,12 @@ INSERT INTO campaigns (
   ends_at
 )
 VALUES (
-  'First 10,000 Users Promo',
-  'Get NGN 5,000 promo balance for being among the first 10,000 users',
+  'First 5,000 Users Promo',
+  'Get NGN 5,000 promo balance for being among the first 5,000 users',
   'signup_bonus',
   5000.00,
   'promo_balance',
-  10000,
+  5000,
   0,
   'active',
   NOW(),
