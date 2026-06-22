@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 import { DatabaseModule } from '@/config/database.module';
 import { RedisModule } from '@/config/redis.module';
 import { LoggerModule } from '@/services/logger.module';
+import { LedgerModule } from '@/services/ledger.module';
 import { AuthModule } from '@/modules/auth/auth.module';
 import { UserModule } from '@/modules/user/user.module';
 import { KycModule } from '@/modules/kyc/kyc.module';
@@ -52,6 +53,7 @@ import { WebhookModule } from '@/modules/webhook/webhook.module';
     DatabaseModule,
     RedisModule,
     LoggerModule,
+    LedgerModule,
 
     // Feature modules
     AuthModule,
